@@ -4,4 +4,6 @@ A discord bot for general uses
 ## Setup:
 
 -Install discord.py
-''' pip install -U discord.py '''
+'''bash
+$ pip install -U discord.py
+'''
