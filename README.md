@@ -1,5 +1,5 @@
-# semijipun-bot
-A discord bot for general uses
+# miqu-bot
+Experimental discord bot
 
 ## Setup:
 
