@@ -15,13 +15,11 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    for guild in client.guilds:
-        if guild.name == target_guild:
-            break
-        else:
-            sys.exit("Target guild is not found")
-    
-    print(f'{client.user} is connected to {guild.name}')
+    guild = discord.utils.find(lambda g: g.name == target_guild, client.guilds)
+    if guild is not None:
+        print(f'{client.user} is connected to {guild.name}')
+    else:
+        sys.exit("Target guild does not match")
     
 
 client.run(token)
