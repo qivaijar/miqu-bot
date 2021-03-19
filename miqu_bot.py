@@ -12,7 +12,7 @@ load_dotenv()
 token = os.getenv('miqu_token')
 target_guild = os.getenv('guild_name')
 command_list = os.getenv('command_list')
-command_list = commands_list.split(" ") # split the string separated by space to get the list of all commands
+command_list = command_list.split(" ") # split the string separated by space to get the list of all commands
 
 client = discord.Client()
 
