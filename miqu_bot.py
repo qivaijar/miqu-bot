@@ -18,7 +18,7 @@ command_list = command_list.split(" ") # split the string separated by space to 
 trigger_word = os.getenv('trigger_word')
 
 client = discord.Client()
-
+# 
 @client.event
 async def on_ready():
     guild = discord.utils.find(lambda g: g.name == target_guild, client.guilds)
@@ -36,7 +36,7 @@ async def on_message(message):
     typed_message = message.content
     if typed_message.startswith(trigger_word):
         typed_command = typed_message.split(" ")[0]
-        input_message = typed_message.split(" ")[1::]
+        input_message = " ".join(typed_message.split(" ")[1::])
 
         if len(re.findall(r"(?=("+'|'.join(command_list)+r"))", typed_command)) == 0:
             await message.channel.send("Miku, Wakannai yo~. type mqhelp to see the full command lists")
@@ -44,5 +44,5 @@ async def on_message(message):
             com_con = cc.command_container(typed_command, input_message)
             com_con = com_con.run()
             await eval(com_con)
-
+            
 client.run(token)
