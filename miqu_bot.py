@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import re
 import sys
+import yaml
 
 # load .env file (containing secret info)
 load_dotenv()
@@ -13,7 +14,11 @@ token = os.getenv('miqu_token')
 target_guild = os.getenv('guild_name')
 command_list = os.getenv('command_list')
 command_list = command_list.split(" ") # split the string separated by space to get the list of all commands
-trigger_word = os.getenv('trigger_word')
+
+# read text list yaml
+with open('text_list.yaml', 'r') as f:
+    text_list = yaml.load(f, Loader=yaml.FullLoader)
+trigger_word = text_list['trigger_word']
 
 client = discord.Client()
 
