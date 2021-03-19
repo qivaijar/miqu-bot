@@ -6,9 +6,9 @@ class CommandContainer:
         self.inp = inputs
     
     def run(self):
-        func = command_list()
+        func = command_list(input_message = self.inp)
         run_command = getattr(func, self.cmd)
-        return run_command(self.inp)
+        return run_command()
 
 def command_container(*kwargs):
     return CommandContainer(*kwargs)
