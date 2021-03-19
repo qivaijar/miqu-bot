@@ -1,4 +1,4 @@
-# use yaml to load all the required strings to be sent
+# import required libraries
 import yaml
 
 # read text list yaml
