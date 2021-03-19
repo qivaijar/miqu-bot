@@ -1,9 +1,9 @@
-# semijipun-bot
-A discord bot for general uses
+# miqu-bot
+Experimental discord bot
 
 ## Setup:
 
-Install discord.py
+Install required packages
 ```bash
-$ pip install -U discord.py
+$ pip install -r requirements.txt
 ```
