@@ -36,7 +36,9 @@ async def on_message(message):
     typed_message = message.content
     if typed_message.startswith(trigger_word):
         typed_command = typed_message.split(" ")[0]
-        input_message = " ".join(typed_message.split(" ")[1::])
+        input_message = typed_message.split(" ")[1::]
+        if len(input_message) > 1:
+            input_message = " ".join(input_message)
 
         if len(re.findall(r"(?=("+'|'.join(command_list)+r"))", typed_command)) == 0:
             await message.channel.send("Miku, Wakannai yo~. type mqhelp to see the full command lists")
