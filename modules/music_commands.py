@@ -115,10 +115,12 @@ class Music(commands.Cog):
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
         await ctx.voice_client.disconnect()
+        for filename in glob.glob("youtube*"):
+            os.remove(filename)
+
         for filename in glob.glob("./youtube*"):
             os.remove(filename)
 
-        
 
     @play.before_invoke
     @yt.before_invoke

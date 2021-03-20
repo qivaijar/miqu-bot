@@ -4,3 +4,4 @@ test.py
 youtube*
 audio/*
 __pycache__/*
+tmp/*
