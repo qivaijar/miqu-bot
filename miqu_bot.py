@@ -10,31 +10,25 @@ import re
 import sys
 sys.path.append('/mnt/c/ffmpeg/ffmpeg/bin/')
 
-try:
-    # load .env file (containing secret info)
-    load_dotenv()
+# load .env file (containing secret info)
+load_dotenv()
 
-    # get discord token and specific guild name
-    token = os.getenv('miqu_token')
-    target_guild = os.getenv('guild_name')
+# get discord token and specific guild name
+token = os.getenv('miqu_token')
+target_guild = os.getenv('guild_name')
 
-    client =  commands.Bot(command_prefix=commands.when_mentioned_or("mq"),
-                    description='Semijipun First Discord Bot. Typed \'mq\' + one of the command below to interact:')
+client =  commands.Bot(command_prefix=commands.when_mentioned_or("mq"),
+                description='Semijipun First Discord Bot. Typed \'mq\' + one of the command below to interact:')
 
-    @client.event
-    async def on_ready():
-        guild = discord.utils.find(lambda g: g.name == target_guild, client.guilds)
-        if guild is not None:
-            print(f'{client.user} is connected to {guild.name}')
-        else:
-            sys.exit("Target guild does not match")
+@client.event
+async def on_ready():
+    guild = discord.utils.find(lambda g: g.name == target_guild, client.guilds)
+    if guild is not None:
+        print(f'{client.user} is connected to {guild.name}')
+    else:
+        sys.exit("Target guild does not match")
 
-    client.add_cog(mc.Music(client))
-    client.add_cog(cl.General(client))
-    client.run(token)
-    
-except KeyboardInterrupt:
-    print('getting in here')
-    for filename in glob.glob("./youtube*"):
-        os.remove(filename)
-        sys.exit()
+client.add_cog(mc.Music(client))
+client.add_cog(cl.General(client))
+client.run(token)
+

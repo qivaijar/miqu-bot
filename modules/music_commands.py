@@ -70,6 +70,18 @@ class Music(commands.Cog):
         await ctx.send('Now playing: {}'.format(query))
 
     @commands.command()
+    async def pause(self, ctx):
+        """Pause an audio stream"""
+        ctx.voice_client.pause()
+        await ctx.send('Now pausing')
+
+    @commands.command()
+    async def resume(self, ctx):
+        """Resume the audio stream"""
+        ctx.voice_client.resume()
+        await ctx.send('Resuming')
+
+    @commands.command()
     async def yt(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""
 
