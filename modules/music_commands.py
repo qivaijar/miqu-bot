@@ -1,6 +1,8 @@
 import asyncio
 import discord
 from discord.ext import commands
+import glob
+import os
 import youtube_dl
 
 ytdl_format_options = {
@@ -100,6 +102,8 @@ class Music(commands.Cog):
     @commands.command()
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
+        for filename in glob.glob("./youtube*"):
+            os.remove(filename)
 
         await ctx.voice_client.disconnect()
 
