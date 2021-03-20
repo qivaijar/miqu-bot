@@ -19,7 +19,6 @@ _search_params = {
     'fileType': 'jpg'
 }
 
-
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -44,7 +43,8 @@ class General(commands.Cog):
     @commands.command()
     async def gim(self, ctx, *message):
         """Return google search result"""
-        os.remove('tmp/image.jpg')
+        if os.path.exists('tmp/image.jpg'):
+            os.remove('tmp/image.jpg')
         message = " ".join(message)
         _search_params['q'] = message
         gis.search(search_params = _search_params, custom_image_name='image')
@@ -54,6 +54,7 @@ class General(commands.Cog):
             discordImage = discord.File(fp)
             await ctx.send(file = discordImage)
 
+    @commands.command()
     async def roll(self, ctx, *message):
         """Return typed message"""
         random_number = np.random.randint(low=1,high=100)
