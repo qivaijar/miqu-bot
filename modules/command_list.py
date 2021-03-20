@@ -7,13 +7,24 @@ with open('text_list.yaml', 'r') as f:
 
 class CommandList:
 
-    def __init__(self, input_message):
+    def __init__(self, input_message, client):
         self.inp = input_message
+        self.client = client
 
     def mqhelp(*args):
-        command_string = "message.channel.send(\"" + text_list['mqhelp_strings'][0] + "\")"
+        command_string = "message.channel.send(\"" + text_list['mqhelp_strings'] + "\")"
         return command_string
+    
+    def mqhelp(*args):
+        command_string = "message.channel.send(\"" + text_list['mqmu_strings'] + "\")"
+    return command_string
 
-def command_list(input_message, *args):
-    return CommandList(input_message, *args)
+    def mqpl(self):
+        print(self.client)
+        print(self.inp)
+        return 0 
+
+
+def command_list(input_message, client):
+    return CommandList(input_message, client)
 
