@@ -3,3 +3,4 @@ test.py
 .vscode
 youtube*
 audio/*
+__pycache__/*
