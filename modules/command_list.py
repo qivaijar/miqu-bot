@@ -3,6 +3,7 @@ import yaml
 import asyncio
 import discord
 from discord.ext import commands
+from googlesearch import search 
 import yaml
 
 class General(commands.Cog):
@@ -14,3 +15,14 @@ class General(commands.Cog):
         """Return user typed message"""
         message = " ".join(message)
         await ctx.send(f'You typed: {message}')
+
+    @commands.command()
+    async def g(self, ctx, *message):
+        """Return user typed message"""
+        searchContent = ""
+        text = message
+        for i in range(0, len(text)):
+            searchContent = searchContent + text[i]
+
+        for j in search(searchContent, stop=1):
+            await ctx.send(j)
