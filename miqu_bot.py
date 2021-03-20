@@ -8,6 +8,7 @@ from modules import music_commands as mc
 import os
 import re
 import sys
+sys.path.append('/mnt/c/ffmpeg/ffmpeg/bin/')
 
 # load .env file (containing secret info)
 load_dotenv()
@@ -15,10 +16,6 @@ load_dotenv()
 # get discord token and specific guild name
 token = os.getenv('miqu_token')
 target_guild = os.getenv('guild_name')
-command_list = os.getenv('command_list')
-command_list = command_list.split(" ") # split the string separated by space to get the list of all commands
-trigger_word = os.getenv('trigger_word')
-music_channel = os.getenv('music_channel')
 
 client =  commands.Bot(command_prefix=commands.when_mentioned_or("mq"),
                    description='Semijipun First Discord Bot. Typed \'mq\' + one of the command below to interact:')
