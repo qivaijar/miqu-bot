@@ -118,6 +118,9 @@ class Music(commands.Cog):
         for filename in glob.glob("youtube*"):
             os.remove(filename)
 
+        for filename in glob.glob("./youtube*"):
+            os.remove(filename)
+
 
     @play.before_invoke
     @yt.before_invoke

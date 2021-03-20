@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 from googlesearch import search 
 import yaml
+import numpy as np
 import os
 
 from google_images_search import GoogleImagesSearch
@@ -52,3 +53,8 @@ class General(commands.Cog):
         with open('tmp/image.jpg', 'rb') as fp: 
             discordImage = discord.File(fp)
             await ctx.send(file = discordImage)
+
+    async def roll(self, ctx, *message):
+        """Return typed message"""
+        random_number = np.random.randint(low=1,high=100)
+        await ctx.send(f'{ctx.author.name}, You rolled: {random_number}')
