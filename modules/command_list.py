@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 from googlesearch import search 
 import yaml
+import numpy as np
 
 class General(commands.Cog):
     def __init__(self, bot):
@@ -26,3 +27,9 @@ class General(commands.Cog):
 
         for j in search(searchContent, num=1, stop=1):
             await ctx.send(j)
+
+    @commands.command()
+    async def roll(self, ctx, *message):
+        """Return typed message"""
+        random_number = np.random.randint(low=1,high=100)
+        await ctx.send(f'{ctx.author.name}, You rolled: {random_number}')
