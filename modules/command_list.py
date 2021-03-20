@@ -12,7 +12,7 @@ class General(commands.Cog):
 
     @commands.command()
     async def typed(self, ctx, *message):
-        """Return user typed message"""
+        """Return typed message"""
         message = " ".join(message)
         await ctx.send(f'You typed: {message}')
 
@@ -24,5 +24,5 @@ class General(commands.Cog):
         for i in range(0, len(text)):
             searchContent = searchContent + text[i]
 
-        for j in search(searchContent, stop=1):
+        for j in search(searchContent, num=1, stop=1):
             await ctx.send(j)
