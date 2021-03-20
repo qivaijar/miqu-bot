@@ -1,30 +1,16 @@
 # import required libraries
 import yaml
+import asyncio
+import discord
+from discord.ext import commands
+import yaml
 
-# read text list yaml
-with open('text_list.yaml', 'r') as f:
-    text_list = yaml.load(f, Loader=yaml.FullLoader)
+class General(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
-class CommandList:
-
-    def __init__(self, input_message, client):
-        self.inp = input_message
-        self.client = client
-
-    def mqhelp(*args):
-        command_string = "message.channel.send(\"" + text_list['mqhelp_strings'] + "\")"
-        return command_string
-    
-    def mqhelp(*args):
-        command_string = "message.channel.send(\"" + text_list['mqmu_strings'] + "\")"
-    return command_string
-
-    def mqpl(self):
-        print(self.client)
-        print(self.inp)
-        return 0 
-
-
-def command_list(input_message, client):
-    return CommandList(input_message, client)
-
+    @commands.command()
+    async def typed(self, ctx, *message):
+        """Return user typed message"""
+        message = " ".join(message)
+        await ctx.send(f'You typed: {message}')
