@@ -43,7 +43,7 @@ async def on_message(message):
         if len(re.findall(r"(?=("+'|'.join(command_list)+r"))", typed_command)) == 0:
             await message.channel.send("Miku, Wakannai yo~. type mqhelp to see the full command lists")
         else:
-            com_con = cc.command_container(typed_command, input_message)
+            com_con = cc.command_container(typed_command, input_message, client)
             com_con = com_con.run()
             await eval(com_con)
             
