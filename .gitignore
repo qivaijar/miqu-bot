@@ -5,3 +5,4 @@ youtube*
 audio/*
 __pycache__/*
 tmp/*
+modules/__pycache__/*
