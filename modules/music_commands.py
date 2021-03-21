@@ -4,6 +4,8 @@ from discord.ext import commands
 import glob
 import os
 import youtube_dl
+from youtube_search import YoutubeSearch
+
 
 ytdl_format_options = {
     'format': 'bestaudio/best',
@@ -82,9 +84,11 @@ class Music(commands.Cog):
         await ctx.send('Resuming')
 
     @commands.command()
-    async def yt(self, ctx, *, url):
+    async def yt(self, ctx, *, search_terms):
         """Plays from a url (almost anything youtube_dl supports)"""
-
+        search_term = " ".join(search_terms)
+        results = YoutubeSearch(search_term, max_results=1).to_dict()
+        url = "youtube.com" + results[0]['url_suffix']
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
@@ -92,9 +96,11 @@ class Music(commands.Cog):
         await ctx.send('Now playing: {}'.format(player.title))
 
     @commands.command()
-    async def stream(self, ctx, *, url):
+    async def stream(self, ctx, *, search_terms):
         """Streams from a url (same as yt, but doesn't predownload)"""
-
+        search_term = " ".join(search_terms)
+        results = YoutubeSearch(search_term, max_results=1).to_dict()
+        url = "youtube.com" + results[0]['url_suffix']
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
