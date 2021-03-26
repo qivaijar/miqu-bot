@@ -7,14 +7,13 @@ from modules import command_list as cl
 from modules import music_commands as mc
 import os
 import sys
-sys.path.append('/mnt/c/ffmpeg/ffmpeg/bin/')
 
 
 # load .env file (containing secret info)
 load_dotenv()
 
 # get discord token and specific guild name
-token = os.getenv('miqu_token')
+token = os.getenv('bot_token')
 target_guild = os.getenv('guild_name')
 
 client =  commands.Bot(command_prefix=commands.when_mentioned_or("mq"),
