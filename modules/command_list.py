@@ -37,8 +37,15 @@ class General(commands.Cog):
         for i in range(0, len(text)):
             searchContent = searchContent + text[i]
 
+        # Define discord embed
+        message = " ".join(message)
+        mqg_embed = discord.Embed(title=f'{ctx.author.name}, You searched: {message}')
+        # mqg_embed = discord.Embed()
+        # mqg_embed.url = 'https://github.com/qivaijar/miqu-bot/blob/main/miqu_bot.py.'
+        # mqg_embed.url = 'discord_embed/mqg_embed.css'
+
         for j in search(searchContent, num=1, stop=1):
-            await ctx.send(j)
+            await ctx.send(" ", embed = mqg_embed)
 
     @commands.command()
     async def gim(self, ctx, *message):
