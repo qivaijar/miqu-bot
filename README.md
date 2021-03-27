@@ -12,16 +12,16 @@ $ pip install -r requirements.txt
 ## add ".env" file
 
 create ".env" file and add credential information 
-coding
 
+```python
 # .env file
 bot_token = <bot-token>           
 guild_name = <your-guild-name>    # e.g.  'my guild'    
-coding
+```
 
 ## Available commmands
-- Below are the commands available when using the bot, triggered using `'mq'` (e.g. `'mqg'`, `'mqgim'`, ...)
-- Commands also can be seen by typing `'mqhelp'` when using the bot.
+- Below are the commands available when using the bot, triggered using `mq` (e.g. `mqg`, `mqgim`, ...)
+- Commands also can be seen by typing `mqhelp` when using the bot.
 
 ### General
 
@@ -29,6 +29,7 @@ coding
 | ------- | ----------- |
 |    g    |  Return google search result|
 |   gim   |  Return google search result|
+
 
 ### Music:
 | command | description |
