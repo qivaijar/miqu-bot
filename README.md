@@ -26,21 +26,21 @@ guild_name = <your-guild-name>    # e.g.  'my guild'
 ### General
 | command | description |
 | ------- | ----------- |
-|    g    |  Return google search result |
-|   gim   |  Return google search result |
-|   roll  |  Return typed massage |
-|  typed  |  Return typed massage |
+|    g    |  Returns google search result |
+|   gim   |  Returns google image search result |
+|   roll  |  Returns random number from 1 to 100 |
+|  typed  |  Returns typed massage |
 
 ### Music:
 | command | description |
 | ------- | ----------- |
 |  join   |  Joins a voice channel |
-|  pause  |  Pause an audio stream |
+|  pause  |  Pauses an audio stream |
 |  play   |  Plays a file from the local filesystem |
-|  resume |  Resume the audio stream |
+|  resume |  Resumes the audio stream |
 |  stop   |  Stops and disconnects the bot from voice |
-|  stream |  Streams from a url (same as yt, but doesn't predownload) |
-|  volume |  Changes the player's volume |
+|  stream |  Streams music from search terms) |
+|  volume |  Adjusts the player's volume |
 
 ## Contributors:
 These people helped in the development process of this bot
