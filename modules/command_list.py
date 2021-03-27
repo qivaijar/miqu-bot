@@ -25,13 +25,13 @@ class General(commands.Cog):
 
     @commands.command()
     async def typed(self, ctx, *message):
-        """Return typed message"""
+        """Returns typed message"""
         message = " ".join(message)
         await ctx.send(f'You typed: {message}')
 
     @commands.command()
     async def g(self, ctx, *message):
-        """Return google search result"""
+        """Returns google search result"""
         searchContent = ""
         text = message
         for i in range(0, len(text)):
@@ -42,7 +42,7 @@ class General(commands.Cog):
 
     @commands.command()
     async def gim(self, ctx, *message):
-        """Return google search result"""
+        """Returns google image search result"""
         if os.path.exists('tmp/image.jpg'):
             os.remove('tmp/image.jpg')
         message = " ".join(message)
@@ -56,6 +56,6 @@ class General(commands.Cog):
 
     @commands.command()
     async def roll(self, ctx, *message):
-        """Return typed message"""
+        """Returns a random number between 1 to 100"""
         random_number = np.random.randint(low=1,high=100)
         await ctx.send(f'{ctx.author.name}, You rolled: {random_number}')
