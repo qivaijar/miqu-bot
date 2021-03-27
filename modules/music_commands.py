@@ -6,7 +6,7 @@ import os
 import youtube_dl
 from youtube_search import YoutubeSearch
 
-
+ffmpeg_path = os.getenv('ffmpeg_path')
 ytdl_format_options = {
     'format': 'bestaudio/best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -47,7 +47,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options, executable = "/mnt/c/ffmpeg/ffmpeg/bin/ffmpeg.exe"), data=data)
+        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options, executable = ffmpeg_path), data=data)
 
 class Music(commands.Cog):
     def __init__(self, bot):
@@ -66,7 +66,7 @@ class Music(commands.Cog):
     async def play(self, ctx, *, query):
         """Plays a file from the local filesystem"""
 
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query, executable = "/mnt/c/ffmpeg/ffmpeg/bin/ffmpeg.exe"))
+        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query, executable = ffmpeg_path))
         ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
 
         await ctx.send('Now playing: {}'.format(query))
