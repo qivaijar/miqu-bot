@@ -73,13 +73,13 @@ class Music(commands.Cog):
 
     @commands.command()
     async def pause(self, ctx):
-        """Pause an audio stream"""
+        """Pauses an audio stream"""
         ctx.voice_client.pause()
         await ctx.send('Now pausing')
 
     @commands.command()
     async def resume(self, ctx):
-        """Resume the audio stream"""
+        """Resumes the audio stream"""
         ctx.voice_client.resume()
         await ctx.send('Resuming')
 
@@ -97,7 +97,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stream(self, ctx, *, search_terms):
-        """Streams from a url (same as yt, but doesn't predownload)"""
+        """Streams music from search terms"""
         search_term = " ".join(search_terms)
         results = YoutubeSearch(search_term, max_results=1).to_dict()
         url = "youtube.com" + results[0]['url_suffix']
@@ -109,7 +109,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def volume(self, ctx, volume: int):
-        """Changes the player's volume"""
+        """Adjusts the player's volume"""
 
         if ctx.voice_client is None:
             return await ctx.send("Not connected to a voice channel.")

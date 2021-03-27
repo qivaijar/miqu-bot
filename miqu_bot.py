@@ -15,7 +15,7 @@ sys.path.append('/mnt/c/ffmpeg/ffmpeg/bin/')
 load_dotenv()
 
 # get discord token and specific guild name
-token = os.getenv('miqu_token')
+token = os.getenv('bot_token')
 target_guild = os.getenv('guild_name')
 
 client =  commands.Bot(command_prefix=commands.when_mentioned_or("mq"),

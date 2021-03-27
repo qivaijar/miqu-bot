@@ -28,7 +28,7 @@ guild_name = <your-guild-name>    # e.g.  'my guild'
 | ------- | ----------- |
 |    g    |  Returns google search result |
 |   gim   |  Returns google image search result |
-|   roll  |  Returns random number from 1 to 100 |
+|   roll  |  Returns a random number between 1 to 100 |
 |  typed  |  Returns typed massage |
 
 ### Music:
