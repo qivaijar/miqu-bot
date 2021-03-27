@@ -3,7 +3,7 @@ Experimental discord bot
 
 ## Setup:
 
-Install required packages by running the comman below:
+Install required packages by running the command below:
 ```bash
 git clone <https://github.com/qivaijar/miqu-bot.git>
 $ cd miqu-bot
