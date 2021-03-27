@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 from modules import command_list as cl
 from modules import music_commands as mc
 import os
-import re
 import sys
-sys.path.append('/mnt/c/ffmpeg/ffmpeg/bin/')
 
 
 # load .env file (containing secret info)
@@ -32,4 +30,8 @@ async def on_ready():
 client.add_cog(mc.Music(client))
 client.add_cog(cl.General(client))
 client.run(token)
+
+
+
+
 

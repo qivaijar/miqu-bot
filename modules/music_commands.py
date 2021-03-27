@@ -83,29 +83,31 @@ class Music(commands.Cog):
         ctx.voice_client.resume()
         await ctx.send('Resuming')
 
-    @commands.command()
-    async def yt(self, ctx, *, search_terms):
-        """Plays from a url (almost anything youtube_dl supports)"""
-        search_term = " ".join(search_terms)
-        results = YoutubeSearch(search_term, max_results=1).to_dict()
-        url = "youtube.com" + results[0]['url_suffix']
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop)
-            ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+    # @commands.command()
+    # async def yt(self, ctx, *, search_terms):
+    #     """Plays from a url (almost anything youtube_dl supports)"""
+    #     results = YoutubeSearch(" ".join(search_terms), max_results=1).to_dict()
+    #     url = "https://www.youtube.com" + results[0]['url_suffix']
+    #     async with ctx.typing():
+    #         player = await YTDLSource.from_url(url, loop=self.bot.loop)
+    #         ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
 
-        await ctx.send('Now playing: {}'.format(player.title))
+    #     await ctx.send('Now playing: {}'.format(player.title))
 
     @commands.command()
     async def stream(self, ctx, *, search_terms):
-        """Streams music from search terms"""
-        search_term = " ".join(search_terms)
-        results = YoutubeSearch(search_term, max_results=1).to_dict()
-        url = "youtube.com" + results[0]['url_suffix']
+        """Streams music from search terms"""        
+        try:
+            results = YoutubeSearch(" ".join(search_terms), max_results=1).to_dict()
+            url = "https://www.youtube.com" + results[0]['url_suffix']
+        except:
+            await ctx.send("Miqu Cannot find the song~")
+            return 
+
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
-
-        await ctx.send('Now playing: {}'.format(player.title))
+        await ctx.send('Now playing: {}'.format(player.title))  
 
     @commands.command()
     async def volume(self, ctx, volume: int):
@@ -120,16 +122,14 @@ class Music(commands.Cog):
     @commands.command()
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
+        if os.path.exists("youtube*"):
+            for filename in glob.glob("youtube*"):
+                os.remove(filename)
+
         await ctx.voice_client.disconnect()
-        for filename in glob.glob("youtube*"):
-            os.remove(filename)
-
-        for filename in glob.glob("./youtube*"):
-            os.remove(filename)
-
 
     @play.before_invoke
-    @yt.before_invoke
+    # @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
