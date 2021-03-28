@@ -9,9 +9,9 @@ git clone <https://github.com/qivaijar/miqu-bot.git>
 $ cd miqu-bot
 $ pip install -r requirements.txt
 ```
-## add ".env" file
+## add `.env` file
 
-create ".env" file and add credential information 
+create `.env` file and add credential information 
 
 ```python
 # .env file
