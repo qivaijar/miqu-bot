@@ -4,9 +4,11 @@ from discord.ext import commands
 import glob
 import os
 import youtube_dl
+from dotenv import load_dotenv
 from youtube_search import YoutubeSearch
 
-
+load_dotenv()
+ffmpeg_path = os.getenv('ffmpeg_path')
 ytdl_format_options = {
     'format': 'bestaudio/best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -47,7 +49,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options, executable = "/mnt/c/ffmpeg/ffmpeg/bin/ffmpeg.exe"), data=data)
+        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options, executable = ffmpeg_path), data=data)
 
 class Music(commands.Cog):
     def __init__(self, bot):
@@ -66,20 +68,20 @@ class Music(commands.Cog):
     async def play(self, ctx, *, query):
         """Plays a file from the local filesystem"""
 
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query, executable = "/mnt/c/ffmpeg/ffmpeg/bin/ffmpeg.exe"))
+        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query, executable = ffmpeg_path))
         ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
 
         await ctx.send('Now playing: {}'.format(query))
 
     @commands.command()
     async def pause(self, ctx):
-        """Pause an audio stream"""
+        """Pauses an audio stream"""
         ctx.voice_client.pause()
         await ctx.send('Now pausing')
 
     @commands.command()
     async def resume(self, ctx):
-        """Resume the audio stream"""
+        """Resumes the audio stream"""
         ctx.voice_client.resume()
         await ctx.send('Resuming')
 
@@ -96,13 +98,14 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stream(self, ctx, *, search_terms):
-        """Streams from a url (same as yt, but doesn't predownload)"""
+        """Streams music from search terms"""        
         try:
             results = YoutubeSearch(" ".join(search_terms), max_results=1).to_dict()
             url = "https://www.youtube.com" + results[0]['url_suffix']
         except:
             await ctx.send("Miqu Cannot find the song~")
             return 
+
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
@@ -110,7 +113,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def volume(self, ctx, volume: int):
-        """Changes the player's volume"""
+        """Adjusts the player's volume"""
 
         if ctx.voice_client is None:
             return await ctx.send("Not connected to a voice channel.")
