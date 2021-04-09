@@ -23,6 +23,7 @@ guild_name = <your-guild-name>    # e.g.  'my guild'
 - Below are the commands available when using the bot, triggered using `mq` (e.g. `mqg`, `mqgim`, ...)
 - Commands also can be seen by typing `mqhelp` when using the bot.
 
+
 ### General
 | command | description |
 | ------- | ----------- |
