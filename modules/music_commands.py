@@ -4,8 +4,10 @@ from discord.ext import commands
 import glob
 import os
 import youtube_dl
+from dotenv import load_dotenv
 from youtube_search import YoutubeSearch
 
+load_dotenv()
 ffmpeg_path = os.getenv('ffmpeg_path')
 ytdl_format_options = {
     'format': 'bestaudio/best',
